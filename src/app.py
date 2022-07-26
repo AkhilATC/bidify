@@ -1,11 +1,16 @@
 import streamlit as st
+from bid_parser import parse
 
 
 def submit_data(proto,str_):
     print(f"protocol is {proto}")
     print(str_)
-    if proto == None or str_ == None:
-        st.error("---------")
+    resp = parse(proto,str_)
+    if resp:
+        st.success(resp)
+    else:
+        st.error(f"Failed to fetch...:) error = {resp[1]}")
+
 
 st.title("bidify 🛩️")
 st.subheader("Bid simulator")
